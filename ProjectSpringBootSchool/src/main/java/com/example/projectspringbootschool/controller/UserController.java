@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -15,8 +16,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /************************* Hanterar formuläret ************************************/
 
+
+    /************************* Hanterar formuläret ************************************/
+    /*
     @GetMapping("/showFormUser")
     public String showFormUser(@ModelAttribute("user") User user, Model model){
         model.addAttribute("users", userService.getAllUsers());
@@ -27,5 +30,23 @@ public class UserController {
     public  String saveUser(@ModelAttribute("user") User user){
         userService.saveUser(user);
         return "redirect:/showFormUser";
+    } */
+
+    @GetMapping("/")
+    public String welcome(){
+        return "user";
+    }
+
+    @PostMapping("/saveUserParam")
+    public  String saveUserParam(@RequestParam("name") String name,
+                                 @RequestParam("adress") String address,
+                                  Model model) {
+
+        User user = new User();
+        user.setName(name);
+        userService.saveUser(user);
+        model.addAttribute("msg", "Du har sparats");
+        return "redirect:/";
+
     }
 }

@@ -12,6 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    private String adress;
 
     public User() {
     }
@@ -30,6 +31,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     @Override
